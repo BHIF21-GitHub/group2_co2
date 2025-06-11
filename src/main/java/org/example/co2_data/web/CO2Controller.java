@@ -1,7 +1,7 @@
 package org.example.co2_data.web;
 
-import org.example.co2_data.pojos.CO2;
 import org.example.co2_data.db.CO2Repository;
+import org.example.co2_data.pojos.CO2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -21,18 +21,10 @@ public class CO2Controller {
     @GetMapping("/api/CO2/values")
     public ResponseEntity<List<CO2>> getValuesOfClassroomByTimeSpan(
             @RequestParam String classRoom,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime from,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime to
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime from,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime to
     ) {
         List<CO2> result = co2Repository.findValuesByClassRoomAndDateRange(classRoom, from, to);
-        return ResponseEntity.ok(result);
-    }
-
-    @GetMapping("api/CO2/live")
-    public ResponseEntity<?> getLastValue(
-            @RequestParam String classRoom
-    ){
-        CO2 result = co2Repository.findLatestMeasurement(classRoom);
         return ResponseEntity.ok(result);
     }
 }
