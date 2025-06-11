@@ -14,11 +14,11 @@ import java.util.List;
 @Component
 public class InitDB {
   @Autowired
-  private Co2Repository co2Repository;
+  private CO2Repository co2Repository;
 
   @PostConstruct
   public void createDateFromFile() {
-    InputStream inputStream = this.getClass().getResourceAsStream("/mockdata.json");
+    InputStream inputStream = this.getClass().getResourceAsStream("/co2_data.json");
     ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
     try {
       List<CO2> co2 = objectMapper.readerForListOf(CO2.class).readValue(inputStream);

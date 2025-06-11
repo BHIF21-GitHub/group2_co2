@@ -1,4 +1,4 @@
-package org.example.co2_data.web;
+package org.example.co2_data.db;
 
 import org.example.co2_data.pojos.CO2;
 import org.springframework.data.jpa.repository.JpaRepository;
