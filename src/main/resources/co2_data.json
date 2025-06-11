@@ -9,13 +9,13 @@
     "date": "2025-02-01 00:00:00",
     "co2": 424.12,
     "sensorNr": 2,
-    "classRoom": "EP32"
+    "classRoom": "EP31"
   },
   {
     "date": "2025-03-01 00:00:00",
     "co2": 425.03,
     "sensorNr": 3,
-    "classRoom": "EP33"
+    "classRoom": "EP31"
   },
   {
     "date": "2025-04-01 00:00:00",
