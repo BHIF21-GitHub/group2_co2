@@ -4,6 +4,7 @@ import org.example.co2_data.db.CO2Repository;
 import org.example.co2_data.pojos.CO2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,5 +52,12 @@ public class CO2Controller {
         return ResponseEntity.ok(
             stats
         );
+    }
+
+    @GetMapping("/api/CO2/live")
+    public ResponseEntity<?> getLatestValue(@RequestParam String classRoom) {
+        CO2 latest = co2Repository.findLatestMeasurement(classRoom);
+
+        return ResponseEntity.ok(latest);
     }
 }
