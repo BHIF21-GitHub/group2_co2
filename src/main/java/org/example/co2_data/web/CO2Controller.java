@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,5 +27,29 @@ public class CO2Controller {
     ) {
         List<CO2> result = co2Repository.findValuesByClassRoomAndDateRange(classRoom, from, to);
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/api/CO2/stats")
+    public ResponseEntity<?> getCo2Stats(
+        @RequestParam String classRoom,
+        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime from,
+        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime to
+    ) {
+        Float max = co2Repository.findMaxCo2Value(classRoom, from, to);
+        Float min = co2Repository.findMinCo2Value(classRoom, from, to);
+        Float avg = co2Repository.findAvgCo2Value(classRoom, from, to);
+
+        if (max == null && min == null && avg == null) {
+            return ResponseEntity.ok("Keine Daten im angebenen Zeitraum");
+        }
+
+        List stats = new ArrayList<Float>();
+        stats.add(max);
+        stats.add(min);
+        stats.add(avg);
+
+        return ResponseEntity.ok(
+            stats
+        );
     }
 }
