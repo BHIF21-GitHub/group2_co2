@@ -34,7 +34,7 @@ public interface CO2Repository extends JpaRepository<CO2, Long> {
             @Param("to") LocalDateTime to
     );
 
-    @Query("SELECT c FROM CO2 c WHERE c.classRoom = :classRoom AND c.dateTime = (" +
+    @Query("SELECT c.co2_value FROM CO2 c WHERE c.classRoom = :classRoom AND c.dateTime = (" +
         "SELECT MAX(c2.dateTime) FROM CO2 c2 WHERE c2.classRoom = :classRoom)")
-    CO2 findLatestMeasurement(@Param("classRoom") String classRoom);
+    Float getLatestMeasurement(@Param("classRoom") String classRoom);
 }

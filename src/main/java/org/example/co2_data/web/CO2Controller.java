@@ -56,8 +56,9 @@ public class CO2Controller {
 
     @GetMapping("/api/CO2/live")
     public ResponseEntity<?> getLatestValue(@RequestParam String classRoom) {
-        CO2 latest = co2Repository.findLatestMeasurement(classRoom);
+        Float latestCO2 = co2Repository.getLatestMeasurement(classRoom);
 
-        return ResponseEntity.ok(latest);
+        return ResponseEntity.ok(latestCO2);
     }
+
 }
